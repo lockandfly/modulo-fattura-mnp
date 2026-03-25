@@ -1,0 +1,772 @@
+<!DOCTYPE html>  
+<html lang="it">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+  <title>Richiesta fattura Montenapoleone Parking</title>
+
+  <!-- html2canvas for JPG export -->  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>  
+    :root{  
+      /* Palette ispirata al logo (navy + azzurro) con look premium/glamour */  
+      --navy: #0b1020;  
+      --navy-2:#101a36;  
+      --blue: #0a5fb3;  
+      --sky:  #29a3ff;  
+      --ice:  #eef7ff;
+
+      --card: #ffffff;  
+      --text: #0e1a2b;  
+      --muted:#50627a;  
+      --border:#dbe7f5;
+
+      --success:#11b981;  
+      --warn:#f59e0b;  
+      --danger:#ef4444;  
+    }
+
+    body {  
+      font-family: Arial, sans-serif;  
+      background:  
+        radial-gradient(1200px 600px at 20% 10%, rgba(41,163,255,0.18), transparent 60%),  
+        radial-gradient(900px 500px at 80% 30%, rgba(10,95,179,0.18), transparent 60%),  
+        linear-gradient(135deg, #f6fbff 0%, #eaf4ff 100%);  
+      margin: 0;  
+      padding: 20px;  
+      color: var(--text);  
+    }
+
+    .container {  
+      max-width: 860px;  
+      margin: 0 auto;  
+      background: var(--card);  
+      border-radius: 16px;  
+      box-shadow:  
+        0 18px 50px rgba(11,16,32,0.18),  
+        0 2px 0 rgba(255,255,255,0.55) inset;  
+      overflow: hidden;  
+      border: 1px solid rgba(41,163,255,0.18);  
+    }
+
+    .header {  
+      text-align: center;  
+      padding: 34px 22px;  
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 55%, #0f2a55 100%);  
+      color: white;  
+      position: relative;  
+    }
+
+    .header::after{  
+      content:"";  
+      position:absolute;  
+      inset:auto -40px -70px -40px;  
+      height: 140px;  
+      background: radial-gradient(closest-side, rgba(41,163,255,0.28), transparent 70%);  
+      filter: blur(2px);  
+      pointer-events:none;  
+    }
+
+    .logo-container {  
+      background: rgba(255, 255, 255, 0.08);  
+      border: 1px solid rgba(41,163,255,0.25);  
+      border-radius: 12px;  
+      padding: 14px 18px;  
+      margin: 0 auto 14px;  
+      display: inline-block;  
+      max-width: 260px;  
+      box-shadow: 0 10px 28px rgba(0,0,0,0.22);  
+      backdrop-filter: blur(6px);  
+    }  
+    .logo {  
+      max-width: 210px;  
+      max-height: 92px;  
+      object-fit: contain;  
+      display:block;  
+    }
+
+    h1 {  
+      margin: 0;  
+      font-size: 24px;  
+      font-weight: 800;  
+      letter-spacing: 0.9px;  
+      text-transform: uppercase;  
+    }
+
+    .header p {  
+      margin: 10px 0 0;  
+      opacity: 0.92;  
+      font-size: 14px;  
+      letter-spacing: 0.2px;  
+    }
+
+    .important-notice {  
+      background: #fff8e6;  
+      border-left: 4px solid var(--warn);  
+      padding: 14px 16px;  
+      margin: 20px;  
+      border-radius: 10px;  
+      display: flex;  
+      align-items: center;  
+      gap: 10px;  
+      box-shadow: 0 10px 24px rgba(245,158,11,0.10);  
+    }  
+    .notice-icon {  
+      color: var(--warn);  
+      font-size: 18px;  
+      font-weight: bold;  
+    }  
+    .notice-text {  
+      margin: 0;  
+      color: #7a4b07;  
+      font-weight: 700;  
+    }
+
+    .form-content { padding: 0 20px 30px; }
+
+    .form-section {  
+      margin-bottom: 22px;  
+      padding: 20px;  
+      background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);  
+      border-radius: 14px;  
+      border: 1px solid var(--border);  
+      box-shadow: 0 10px 26px rgba(11,16,32,0.08);  
+    }
+
+    .section-title {  
+      font-size: 14px;  
+      font-weight: 900;  
+      margin: 0 0 16px;  
+      color: var(--navy-2);  
+      padding-bottom: 10px;  
+      text-transform: uppercase;  
+      letter-spacing: 0.8px;  
+      border-bottom: 2px solid rgba(41,163,255,0.35);  
+      position: relative;  
+    }  
+    .section-title::after{  
+      content:"";  
+      position:absolute;  
+      left:0; bottom:-2px;  
+      width: 130px; height: 2px;  
+      background: linear-gradient(90deg, var(--sky), rgba(41,163,255,0));  
+    }
+
+    .form-group { margin-bottom: 14px; }
+
+    label {  
+      display: block;  
+      margin-bottom: 6px;  
+      font-weight: 700;  
+      font-size: 13px;  
+      color: #20324f;  
+    }
+
+    input, textarea, select {  
+      width: 100%;  
+      padding: 10px 12px;  
+      border: 1px solid rgba(16,26,54,0.18);  
+      border-radius: 10px;  
+      font-size: 14px;  
+      background: white;  
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.12s;  
+      box-sizing: border-box;  
+    }  
+    input:focus, textarea:focus, select:focus {  
+      outline: none;  
+      border-color: rgba(41,163,255,0.8);  
+      box-shadow: 0 0 0 4px rgba(41,163,255,0.22);  
+      transform: translateY(-1px);  
+    }
+
+    .required { color: var(--danger); }
+
+    .choice-grid{  
+      display:grid;  
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));  
+      gap: 10px;  
+      margin-top: 8px;  
+    }  
+    .choice-item{  
+      display:flex;  
+      align-items:flex-start;  
+      gap:10px;  
+      padding: 12px 12px;  
+      border: 1px solid rgba(16,26,54,0.12);  
+      background: rgba(238,247,255,0.55);  
+      border-radius: 12px;  
+      cursor:pointer;  
+      transition: transform .15s, box-shadow .15s, border-color .15s;  
+    }  
+    .choice-item:hover{  
+      transform: translateY(-1px);  
+      box-shadow: 0 12px 26px rgba(11,16,32,0.10);  
+      border-color: rgba(41,163,255,0.35);  
+    }  
+    .choice-item input{  
+      width:auto;  
+      margin-top: 2px;  
+    }  
+    .choice-item label{  
+      margin:0;  
+      font-weight: 800;  
+      color:#162645;  
+      cursor:pointer;  
+    }  
+    .choice-sub{  
+      display:block;  
+      margin-top:4px;  
+      font-weight:600;  
+      font-size:12px;  
+      color: var(--muted);  
+    }
+
+    .inline-2{  
+      display:grid;  
+      grid-template-columns: 1fr 1fr;  
+      gap: 12px;  
+    }  
+    @media (max-width: 650px){  
+      .inline-2{ grid-template-columns: 1fr; }  
+    }
+
+    .signature-section {  
+      margin-top: 18px;  
+      padding: 18px;  
+      background: linear-gradient(180deg, rgba(238,247,255,0.65), rgba(255,255,255,1));  
+      border-radius: 14px;  
+      border: 2px dashed rgba(41,163,255,0.45);  
+      text-align: center;  
+    }  
+    .signature-title {  
+      font-weight: 900;  
+      margin: 0 0 10px;  
+      color: var(--navy-2);  
+      letter-spacing: 0.3px;  
+    }  
+    .signature-canvas {  
+      width: 100%;  
+      height: 150px;  
+      border: 1px solid rgba(16,26,54,0.18);  
+      border-radius: 12px;  
+      background: white;  
+      cursor: crosshair;  
+      margin: 10px 0;  
+    }
+
+    .button {  
+      padding: 11px 16px;  
+      border: none;  
+      border-radius: 12px;  
+      font-weight: 900;  
+      cursor: pointer;  
+      transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;  
+      font-size: 13px;  
+      display: inline-flex;  
+      align-items: center;  
+      gap: 8px;  
+      letter-spacing: 0.2px;  
+    }  
+    .button:hover {  
+      transform: translateY(-1px);  
+      box-shadow: 0 14px 28px rgba(11,16,32,0.18);  
+      filter: brightness(1.02);  
+    }  
+    .button-secondary { background: #334155; color: white; }  
+    .button-primary {  
+      background: linear-gradient(135deg, var(--blue) 0%, var(--sky) 100%);  
+      color: white;  
+      box-shadow: 0 10px 22px rgba(41,163,255,0.22);  
+      text-decoration:none;  
+    }  
+    .button-success { background: linear-gradient(135deg, #0ea371 0%, var(--success) 100%); color:white; }
+
+    .submit-section {  
+      text-align: center;  
+      margin-top: 26px;  
+      padding: 18px;  
+      background: linear-gradient(180deg, #ffffff 0%, #f6fbff 100%);  
+      border-radius: 14px;  
+      border: 1px solid var(--border);  
+      box-shadow: 0 10px 26px rgba(11,16,32,0.08);  
+    }
+
+    .review-box{  
+      margin: 12px 0 16px;  
+      padding: 16px;  
+      border-radius: 14px;  
+      border: 1px solid rgba(41,163,255,0.22);  
+      background: radial-gradient(700px 180px at 10% 0%, rgba(41,163,255,0.18), transparent 60%),  
+                  linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);  
+      text-align: left;  
+    }  
+    .review-title{  
+      margin:0 0 8px;  
+      font-weight: 950;  
+      color: var(--navy-2);  
+      text-transform: uppercase;  
+      letter-spacing: .7px;  
+      font-size: 13px;  
+    }  
+    .review-row{  
+      display:flex;  
+      gap: 10px;  
+      flex-wrap:wrap;  
+      align-items:center;  
+      justify-content:flex-start;  
+    }  
+    .review-hint{  
+      margin: 10px 0 0;  
+      font-size: 12px;  
+      color: var(--muted);  
+      line-height: 1.35;  
+    }
+
+    .instructions {  
+      margin-top: 18px;  
+      padding: 18px;  
+      background: #ecfdf5;  
+      border-left: 4px solid var(--success);  
+      border-radius: 12px;  
+      text-align: left;  
+    }  
+    .instructions h3 {  
+      margin: 0 0 10px;  
+      color: #065f46;  
+      font-size: 16px;  
+    }  
+    .instructions ol {  
+      margin: 10px 0;  
+      padding-left: 20px;  
+      color: #047857;  
+    }  
+    .instructions li { margin-bottom: 8px; line-height: 1.4; }
+
+    .highlight-contact {  
+      background: #d1fae5;  
+      padding: 3px 8px;  
+      border-radius: 8px;  
+      font-weight: 900;  
+      color: #065f46;  
+      display: inline-block;  
+    }
+
+    .footer {  
+      text-align: center;  
+      padding: 14px 16px;  
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);  
+      color: white;  
+      font-size: 11px;  
+      border-top: 1px solid rgba(41,163,255,0.18);  
+    }
+
+    @media (max-width: 600px) {  
+      body { padding: 10px; }  
+      .header { padding: 24px 16px; }  
+      h1 { font-size: 20px; }  
+      .form-section { padding: 16px; }  
+    }  
+  </style>  
+</head>
+
+<body>  
+  <div class="container" id="formContainer">  
+    <div class="header">  
+      <div class="logo-container">  
+        <img src="logo-montenapoleone-parking.jpg"  
+             alt="Montenapoleone Parking Logo"  
+             class="logo"  
+             crossOrigin="anonymous"  
+             onerror="this.style.display='none'">  
+      </div>  
+      <h1>MODULO RICHIESTA FATTURA</h1>  
+      <p>Montenapoleone Parking</p>  
+    </div>
+
+    <div class="important-notice">  
+      <div class="notice-icon">⚠</div>  
+      <p class="notice-text">Si prega di inviare il modulo solo dopo aver usufruito del servizio</p>  
+    </div>
+
+    <div class="form-content">  
+      <form id="fatturaForm">  
+        <div class="form-section">  
+          <h2 class="section-title">DATI DEL CLIENTE</h2>
+
+          <div class="form-group">  
+            <label for="nome">Nome e Cognome <span class="required">*</span></label>  
+            <input type="text" id="nome" name="nome" required />  
+          </div>
+
+          <div class="form-group">  
+            <label for="ragioneSociale">Ragione Sociale (azienda) <span class="required">*</span></label>  
+            <input type="text" id="ragioneSociale" name="ragioneSociale" required />  
+          </div>
+
+          <div class="form-group">  
+            <label for="codiceFiscale">Codice Fiscale / Partita IVA <span class="required">*</span></label>  
+            <input type="text" id="codiceFiscale" name="codiceFiscale" required />  
+          </div>
+
+          <div class="form-group">  
+            <label for="sdi">Codice SDI (Codice Destinatario) <span class="required">*</span></label>  
+            <input type="text" id="sdi" name="sdi" required value="0000000" />  
+          </div>
+
+          <div class="form-group">  
+            <label for="indirizzo">Indirizzo completo <span class="required">*</span></label>  
+            <input type="text" id="indirizzo" name="indirizzo" required />  
+          </div>
+
+          <div class="form-group">  
+            <label for="capCittaProvincia">CAP / Città / Provincia <span class="required">*</span></label>  
+            <input type="text" id="capCittaProvincia" name="capCittaProvincia" required />  
+          </div>
+
+          <div class="form-group">  
+            <label for="email">E-mail <span class="required">*</span></label>  
+            <input type="email" id="email" name="email" required />  
+          </div>
+
+          <div class="form-group">  
+            <label for="telefono">Telefono <span class="required">*</span></label>  
+            <input type="tel" id="telefono" name="telefono" required />  
+          </div>  
+        </div>
+
+        <div class="form-section">  
+          <h2 class="section-title">DETTAGLI DEL SERVIZIO / PARCHEGGIO</h2>
+
+          <div class="form-group">  
+            <label for="targa">Targa veicolo <span class="required">*</span></label>  
+            <input type="text" id="targa" name="targa" required placeholder="es. MI 123AB" />  
+          </div>
+
+          <!-- Servizi multipli -->  
+          <div class="form-group">  
+            <label>Tipologia servizio <span class="required">*</span></label>
+
+            <div class="choice-grid">  
+              <div class="choice-item">  
+                <input type="checkbox" id="srvParcheggio" name="servizi" value="Parcheggio" />  
+                <div>  
+                  <label for="srvParcheggio">Parcheggio</label>  
+                  <span class="choice-sub">Richiede data/ora inizio e data/ora fine (anche multi-giorno)</span>  
+                </div>  
+              </div>
+
+              <div class="choice-item">  
+                <input type="checkbox" id="srvLavaggio" name="servizi" value="Lavaggio auto" />  
+                <div>  
+                  <label for="srvLavaggio">Lavaggio auto</label>  
+                  <span class="choice-sub">Richiede solo la data del lavaggio</span>  
+                </div>  
+              </div>  
+            </div>  
+          </div>
+
+          <!-- Campi condizionali Parcheggio -->  
+          <div class="form-group" id="parcheggioGroup" style="display:none;">  
+            <div class="inline-2">  
+              <div>  
+                <label for="parcheggioInizio">Data e ora inizio parcheggio <span class="required">*</span></label>  
+                <input type="datetime-local" id="parcheggioInizio" name="parcheggioInizio" />  
+              </div>  
+              <div>  
+                <label for="parcheggioFine">Data e ora fine parcheggio <span class="required">*</span></label>  
+                <input type="datetime-local" id="parcheggioFine" name="parcheggioFine" />  
+              </div>  
+            </div>  
+            <p style="margin:10px 0 0; font-size:12px; color: var(--muted);">  
+              Nota: puoi indicare una fine anche in un giorno successivo.  
+            </p>  
+          </div>
+
+          <!-- Campi condizionali Lavaggio -->  
+          <div class="form-group" id="lavaggioGroup" style="display:none;">  
+            <label for="dataLavaggio">Data lavaggio <span class="required">*</span></label>  
+            <input type="date" id="dataLavaggio" name="dataLavaggio" />  
+          </div>
+
+          <div class="form-group">  
+            <label for="importo">Importo pagato <span class="required">*</span></label>  
+            <input type="number" id="importo" name="importo" required step="0.01" min="0" placeholder="€ 0,00" />  
+          </div>  
+        </div>
+
+        <div class="form-section">  
+          <h2 class="section-title">NOTE (opzionale)</h2>  
+          <div class="form-group">  
+            <label for="note">Eventuali informazioni aggiuntive</label>  
+            <textarea id="note" name="note" rows="4" placeholder="Scrivi qui eventuali note..."></textarea>  
+          </div>  
+        </div>
+
+        <div class="signature-section">  
+          <p class="signature-title">FIRMA CLIENTE <span class="required">*</span></p>  
+          <p style="margin: 0; font-size: 12px; color: var(--muted);">  
+            Firma nell'area sottostante usando il mouse o il dito (touch).  
+          </p>
+
+          <canvas id="signatureCanvas" class="signature-canvas"></canvas>
+
+          <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top: 10px;">  
+            <button type="button" class="button button-secondary" onclick="clearSignature()">  
+              Cancella firma  
+            </button>  
+          </div>  
+        </div>
+
+        <div class="submit-section">  
+          <div class="review-box">  
+            <p class="review-title">Lascia una recensione</p>
+
+            <div class="review-row">  
+              <a href="https://maps.app.goo.gl/hsT8niaBdc32K2Hp6" target="_blank" class="button button-primary">  
+                Google Maps  
+              </a>
+
+              <a href="https://www.instagram.com/montenapoleone_parking?igsh=MXU1NzBqNmJoMTYyNw==" target="_blank"  
+                 class="button button-secondary" style="text-decoration:none;">  
+                Instagram  
+              </a>  
+            </div>
+
+            <p class="review-hint">Il tuo feedback ci aiuta a migliorare. Grazie!</p>  
+          </div>
+
+          <button type="button" class="button button-primary" onclick="generateJPG()">  
+            Scarica modulo compilato (JPG)  
+          </button>
+
+          <button type="button" class="button button-success" onclick="generateSignedJPG()" style="margin-left: 10px;">  
+            Scarica modulo firmato (JPG)  
+          </button>
+
+          <div class="instructions" id="istruzioniFinali" style="display:none;">  
+            <h3>Istruzioni per l'invio</h3>  
+            <p style="margin: 0 0 10px; color:#047857;">  
+              Invia il file scaricato via e-mail a:  
+              <span class="highlight-contact">fatturemnp@gmail.com</span>  
+            </p>
+
+            <ol>  
+              <li>Scarica il modulo in formato JPG cliccando uno dei pulsanti sopra</li>  
+              <li>Apri la tua app e-mail e crea un nuovo messaggio</li>  
+              <li>Allega il file JPG appena scaricato</li>  
+              <li>Invia il messaggio a <span class="highlight-contact">fatturemnp@gmail.com</span></li>  
+            </ol>
+
+            <p style="margin: 10px 0 0; color:#047857;">Oppure contatta il parcheggio:</p>  
+            <p class="highlight-contact" style="margin: 6px 0 0;">Cellulare 3404249852</p>  
+            <p class="highlight-contact" style="margin: 6px 0 0;">Fisso 02784266</p>  
+          </div>  
+        </div>  
+      </form>  
+    </div>
+
+    <div class="footer">  
+      <p style="margin:0;">  
+        <strong>Montenapoleone Parking</strong> | Corso Venezia, 11, 20121 Milano MI | www.montenapoleoneparking.com  
+      </p>  
+      <p style="margin-top: 4px; margin-bottom:0; font-size: 10px;">  
+        📧 fatturemnp@gmail.com | 📞 Cellulare 3404249852 | ☎ Fisso 02784266  
+      </p>  
+    </div>  
+  </div>
+
+  <script>  
+    // --- Servizi multipli (checkbox) + campi condizionali ---
+    const srvParcheggio = document.getElementById('srvParcheggio');  
+    const srvLavaggio = document.getElementById('srvLavaggio');
+
+    const parcheggioGroup = document.getElementById('parcheggioGroup');  
+    const lavaggioGroup = document.getElementById('lavaggioGroup');
+
+    const parcheggioInizio = document.getElementById('parcheggioInizio');  
+    const parcheggioFine = document.getElementById('parcheggioFine');  
+    const dataLavaggio = document.getElementById('dataLavaggio');
+
+    function setRequired(el, yes) {  
+      if (!el) return;  
+      if (yes) el.setAttribute('required', 'required');  
+      else el.removeAttribute('required');  
+    }  
+    function clearValue(el) { if (el) el.value = ''; }
+
+    function syncServiceFields() {  
+      const isParcheggio = srvParcheggio.checked;  
+      const isLavaggio = srvLavaggio.checked;
+
+      // Parcheggio  
+      parcheggioGroup.style.display = isParcheggio ? 'block' : 'none';  
+      setRequired(parcheggioInizio, isParcheggio);  
+      setRequired(parcheggioFine, isParcheggio);  
+      if (!isParcheggio) {  
+        clearValue(parcheggioInizio);  
+        clearValue(parcheggioFine);  
+      }
+
+      // Lavaggio  
+      lavaggioGroup.style.display = isLavaggio ? 'block' : 'none';  
+      setRequired(dataLavaggio, isLavaggio);  
+      if (!isLavaggio) clearValue(dataLavaggio);  
+    }
+
+    srvParcheggio.addEventListener('change', syncServiceFields);  
+    srvLavaggio.addEventListener('change', syncServiceFields);
+
+    window.addEventListener('load', () => syncServiceFields());
+
+    function getSelectedServices() {  
+      const checked = [...document.querySelectorAll('input[name="servizi"]:checked')];  
+      return checked.map(x => x.value);  
+    }
+
+    // --- Signature canvas ---
+    const canvas = document.getElementById('signatureCanvas');  
+    const ctx = canvas.getContext('2d');  
+    let isDrawing = false;  
+    let lastX = 0, lastY = 0;
+
+    function resizeCanvas() {  
+      const rect = canvas.getBoundingClientRect();  
+      const ratio = window.devicePixelRatio || 1;  
+      canvas.width = rect.width * ratio;  
+      canvas.height = rect.height * ratio;  
+      ctx.setTransform(1,0,0,1,0,0);  
+      ctx.scale(ratio, ratio);
+
+      ctx.strokeStyle = '#0b1020';  
+      ctx.lineWidth = 2;  
+      ctx.lineCap = 'round';  
+      ctx.lineJoin = 'round';  
+    }
+
+    window.addEventListener('load', () => {  
+      resizeCanvas();  
+    });  
+    window.addEventListener('resize', () => resizeCanvas());
+
+    function getPos(e) {  
+      const rect = canvas.getBoundingClientRect();  
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;  
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;  
+      return { x: clientX - rect.left, y: clientY - rect.top };  
+    }
+
+    function startDraw(e) {  
+      isDrawing = true;  
+      const pos = getPos(e);  
+      lastX = pos.x; lastY = pos.y;  
+      e.preventDefault();  
+    }
+
+    function draw(e) {  
+      if (!isDrawing) return;  
+      const pos = getPos(e);  
+      ctx.beginPath();  
+      ctx.moveTo(lastX, lastY);  
+      ctx.lineTo(pos.x, pos.y);  
+      ctx.stroke();  
+      lastX = pos.x; lastY = pos.y;  
+      e.preventDefault();  
+    }
+
+    function endDraw() { isDrawing = false; }
+
+    canvas.addEventListener('mousedown', startDraw);  
+    canvas.addEventListener('mousemove', draw);  
+    window.addEventListener('mouseup', endDraw);
+
+    canvas.addEventListener('touchstart', startDraw, { passive: false });  
+    canvas.addEventListener('touchmove', draw, { passive: false });  
+    window.addEventListener('touchend', endDraw);
+
+    function clearSignature() {  
+      const rect = canvas.getBoundingClientRect();  
+      ctx.clearRect(0, 0, rect.width, rect.height);  
+    }
+
+    function isSignatureEmpty() {  
+      const rect = canvas.getBoundingClientRect();  
+      const imgData = ctx.getImageData(0, 0, rect.width, rect.height).data;  
+      for (let i = 3; i < imgData.length; i += 4) {  
+        if (imgData[i] !== 0) return false;  
+      }  
+      return true;  
+    }
+
+    function validateForm(requireSignature) {  
+      const form = document.getElementById('fatturaForm');
+
+      if (!form.checkValidity()) {  
+        form.reportValidity();  
+        return false;  
+      }
+
+      const services = getSelectedServices();  
+      if (services.length === 0) {  
+        alert('Seleziona almeno una tipologia di servizio.');  
+        return false;  
+      }
+
+      // coerenza date/ore parcheggio (solo se selezionato)  
+      if (srvParcheggio.checked) {  
+        const start = parcheggioInizio.value;  
+        const end = parcheggioFine.value;  
+        if (start && end && new Date(end) < new Date(start)) {  
+          alert("La data/ora di fine parcheggio non può essere precedente all'inizio.");  
+          return false;  
+        }  
+      }
+
+      if (requireSignature && isSignatureEmpty()) {  
+        alert('Inserisci la firma del cliente.');  
+        return false;  
+      }
+
+      return true;  
+    }
+
+    async function captureContainerJPG(filename) {  
+      const container = document.getElementById('formContainer');  
+      document.getElementById('istruzioniFinali').style.display = 'block';  
+      document.activeElement && document.activeElement.blur();
+
+      const canvasImage = await html2canvas(container, {  
+        backgroundColor: '#ffffff',  
+        scale: 2,  
+        useCORS: true,  
+        allowTaint: true,  
+        scrollX: 0,  
+        scrollY: -window.scrollY  
+      });
+
+      const imgData = canvasImage.toDataURL('image/jpeg', 0.92);  
+      const link = document.createElement('a');  
+      link.href = imgData;  
+      link.download = filename;  
+      document.body.appendChild(link);  
+      link.click();  
+      document.body.removeChild(link);  
+    }
+
+    function safeName() {  
+      const nome = document.getElementById('nome').value.trim() || 'Cliente';  
+      return nome.replace(/\s+/g, '_').replace(/[^\w\-]/g, '');  
+    }
+
+    async function generateJPG() {  
+      if (!validateForm(false)) return;  
+      await captureContainerJPG(`Richiesta_Fattura_Montenapoleone_Parking_${safeName()}.jpg`);  
+    }
+
+    async function generateSignedJPG() {  
+      if (!validateForm(true)) return;  
+      await captureContainerJPG(`Modulo_Firmato_Montenapoleone_Parking_${safeName()}.jpg`);  
+    }  
+  </script>  
+</body>  
+</html>  
